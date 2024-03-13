@@ -166,10 +166,13 @@ resource "azurerm_windows_virtual_machine" "example" {
   }
 }
 
-resource "null_resource" "first" {
-  provisioner "file" {
-    source = "mypublicip"
-    destination = "/tmp/mypublicip"
+resource "null_resource" "fourth" {
+  provisioner "remote-exec" {
+    inline = [
+      "ipconfig", 
+      "dir",
+      "hostname"
+    ]
     connection {
       user = var.admin_username
       password = var.admin_password
