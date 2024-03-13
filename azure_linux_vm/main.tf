@@ -98,3 +98,19 @@ resource "azurerm_linux_virtual_machine" "main" {
   }
 }
 
+resource "null_resource" "first" {
+  provisioner "remote-exec" {
+    inline = [
+      "ipconfig", 
+      "ls -ltr",
+      "hostname"
+    ]
+    connection {
+      user = var.admin_username
+      password = var.admin_password
+      type = "winrm"
+      host = azurerm_linux_virtual_machine.example.public_ip_address
+    }
+  }
+}
+
