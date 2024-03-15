@@ -13,7 +13,6 @@ resource "azurerm_kubernetes_cluster" "example" {
     name       = "default"
     node_count = 1
     vm_size    = var.size
-    enable_auto_scaling  = true
   }
 
   identity {
